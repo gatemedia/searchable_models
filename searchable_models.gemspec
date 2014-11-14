@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = SearchableModels::VERSION
   s.authors     = ["David Fernandez"]
   s.email       = ["david.fernandez@gatemedia.ch"]
-  s.homepage    = "https://github.com/gatemedia/fogged"
+  s.homepage    = "https://github.com/gatemedia/searchable_models"
   s.summary     = "SearchableModels provides several helpers to build the search function on ActiveRecord models"
   s.description = "SearchableModels provides helpers to facilitate the build of the search function on a ActiveRecord model. This search can be done on several fields with different configurations: exact match, fuzzy, etc."
   s.license     = "MIT"
