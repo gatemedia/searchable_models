@@ -1,49 +1,3 @@
-# This module adds a scope #search which accepts a hash.
-# This scope will query the fields to get a match. For queries on string fields,
-# there is an option to do a "fuzzy" search (searching "bar" will match
-# "foobarish")
-#
-# Examples
-#
-# class Car < ActiveRecord::Base
-#
-#   # calling search with :query => "bar", will fuzzy search on name and
-#   # description
-#   search_on :name, :mode => :fuzzy, :param => :query
-#   search_on :description, :mode => :fuzzy, :param => :query
-#
-#   # exact matching on any field
-#   search_on :number_of_doors
-#
-#   # supports acts_as_taggable_on
-#   # eg search(:tags => %w(tag1 tag2)) # AND combination
-#   #    search(:tags => %w(tag1 tag2), :tags_combination => "OR") # OR combination
-#   search_on :tags
-#
-#   # supports globalize 3
-#   translates :model_name
-#   search_on :model_name, :mode => :fuzzy, :param :query
-#
-#   # support has_many ids
-#   has_many :drivers
-#   search_on :drivers_ids # search(:driver_ids => [23, 24, 27])
-#
-#   # support has_many ids, through
-#   has_many :doors # class Door < ActiveRecord::Base; has_many :components; end
-#   search_on :component_id, :through => doors
-#
-#   # support deep through
-#   has_many :pieces
-#   search :provider_id, :through => { :doors => :components }
-#
-#   # support scopes
-#   scope :for_date, ->(date) { where(import_date => date)}
-#   search_on :date, :mode => :scope, :scope => :for_date
-#
-#   # support enums
-#   enum kind => [:van, :sedan]
-#   search_on :kind, :mode => :enum
-# end
 module SearchableModels
   module Searchable
     extend ActiveSupport::Concern
@@ -134,7 +88,7 @@ module SearchableModels
       def _tags_search(results, value, tags_combination = "AND")
         return results unless value.try(:any?)
         case tags_combination
-        when "OR"
+        when :or
           results.tagged_with(value, :any => true)
         else
           results.tagged_with(value)

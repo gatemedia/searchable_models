@@ -48,7 +48,7 @@ class CarTest < ActiveSupport::TestCase
     c = cars(:car_foo)
     c.update!(:tag_list => %w(version_1 version_2))
 
-    assert_results(Car.search(:tags => %w(version_1), :tags_combination => "OR"))
+    assert_results(Car.search(:tags => %w(version_1), :tags_combination => :or))
   end
 
   test "search car with i18n field" do

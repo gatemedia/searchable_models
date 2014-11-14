@@ -180,7 +180,7 @@ end
 
 ```ruby
 Car.search(:tags => [:blue, :old])
-Car.search(:tags => [:blue, :yellow, :red], :tags_combination => "OR")
+Car.search(:tags => [:blue, :yellow, :red], :tags_combination => :or)
 ```
 
 ### `globalize` support
