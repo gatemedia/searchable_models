@@ -2,6 +2,7 @@
 ENV["RAILS_ENV"] = "test"
 require "pry"
 require "acts-as-taggable-on"
+require "globalize"
 require "simplecov"
 SimpleCov.start "rails"
 

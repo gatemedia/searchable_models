@@ -50,4 +50,19 @@ class CarTest < ActiveSupport::TestCase
 
     assert_results(Car.search(:tags => %w(version_1), :tags_combination => "OR"))
   end
+
+  test "search car with i18n field" do
+    c = cars(:car_foo)
+    I18n.available_locales.each do |locale|
+      Globalize.with_locale(locale) do
+        c.update!(:commercial_name => "Commercial Name #{locale}")
+      end
+    end
+
+    Globalize.with_locale(:pt) do
+      c.update!(:commercial_name => "Commercial Name foobarish! pt")
+    end
+
+    assert_results(Car.search(:commercial_name => "bar"))
+  end
 end

@@ -31,7 +31,11 @@ class Car < ActiveRecord::Base
   enum :kind => %i(van sedan family)
   search_on :kind, :mode => :enum, :param => :type_of_car
 
-  # search on tags
+  # search on tags (support for acts-as-taggable-on)
   acts_as_taggable
   search_on :tags
+
+  # search on i18n fields (support for globalize)
+  translates :commercial_name
+  search_on :commercial_name, :mode => :fuzzy
 end
