@@ -30,4 +30,8 @@ class Car < ActiveRecord::Base
   # search on enums
   enum :kind => %i(van sedan family)
   search_on :kind, :mode => :enum, :param => :type_of_car
+
+  # search on tags
+  acts_as_taggable
+  search_on :tags
 end

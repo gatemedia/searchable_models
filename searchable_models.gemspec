@@ -23,4 +23,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "pry", "~> 0.10"
   s.add_development_dependency "minitest-reporters", "~> 1.0"
   s.add_development_dependency "simplecov", "~> 0.8"
+  s.add_development_dependency "acts-as-taggable-on", "~> 3.3"
+  s.add_development_dependency "globalize", "~> 4.0"
 end

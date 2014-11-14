@@ -1,6 +1,7 @@
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
 require "pry"
+require "acts-as-taggable-on"
 require "simplecov"
 SimpleCov.start "rails"
 

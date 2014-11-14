@@ -33,12 +33,17 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (3.3.0)
+      activerecord (>= 3, < 5)
     ansi (1.4.3)
     arel (5.0.1.20140414130214)
     builder (3.2.2)
     coderay (1.1.0)
     docile (1.1.5)
     erubis (2.7.0)
+    globalize (4.0.2)
+      activemodel (>= 4.0.0, < 5)
+      activerecord (>= 4.0.0, < 5)
     hike (1.2.3)
     i18n (0.6.11)
     json (1.8.1)
@@ -103,6 +108,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on (~> 3.3)
+  globalize (~> 4.0)
   minitest-reporters (~> 1.0)
   pry (~> 0.10)
   searchable_models!

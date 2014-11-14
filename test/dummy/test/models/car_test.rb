@@ -36,4 +36,18 @@ class CarTest < ActiveSupport::TestCase
   test "search car with enum" do
     assert_results(Car.search(:type_of_car => "family"))
   end
+
+  test "search car with tags AND" do
+    c = cars(:car_foo)
+    c.update!(:tag_list => %w(version_1 version_2))
+
+    assert_results(Car.search(:tags => %w(version_1 version_2)))
+  end
+
+  test "search car with tags OR" do
+    c = cars(:car_foo)
+    c.update!(:tag_list => %w(version_1 version_2))
+
+    assert_results(Car.search(:tags => %w(version_1), :tags_combination => "OR"))
+  end
 end
