@@ -3,37 +3,33 @@ module SearchableModels
     extend ActiveSupport::Concern
 
     included do
-      mattr_accessor :search_fields, :instance_accessor => false do
-        {}
-      end
-
-      mattr_accessor :search_order, :instance_accessor => false do
-        :id
-      end
+      class_attribute :_search_fields
+      class_attribute :_search_order
 
       define_singleton_method(:search) do |params|
         results = all
 
-        fields = search_fields.select do |_, v|
+        fields = _search_fields.select do |_, v|
           v.try(:exclude?, :mode) \
             || %i(exact scope enum).include?(v.try(:[], :mode))
         end
         results = _search(results, fields, params)
 
-        fields = search_fields.select { |_, v| v.try(:[], :mode) == :fuzzy }
+        fields = _search_fields.select { |_, v| v.try(:[], :mode) == :fuzzy }
         results = _fuzzy_search(results, fields, params)
 
-        results.uniq.order(search_order)
+        results.uniq.order(_search_order || :id)
       end
     end
 
     module ClassMethods
       def search_on(*args)
-        self.search_fields.merge!(args.first => args.extract_options!)
+        self._search_fields ||= {}
+        self._search_fields.merge!(args.first => args.extract_options!)
       end
 
       def search_ordered_by(field)
-        self.search_order = field
+        self._search_order = field
       end
 
       private
