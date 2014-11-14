@@ -1,0 +1,8 @@
+provider_one:
+  name: Provider one
+
+provider_two:
+  name: Provider two
+
+provider_foo:
+  name: Provider foo

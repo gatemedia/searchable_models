@@ -1,0 +1,14 @@
+door_one:
+  name: Door one
+  car: car_one
+  component: component_one
+
+door_two:
+  name: Door Two
+  car: car_two
+  component: component_two
+
+door_foo:
+  name: Door Foo
+  car: car_foo
+  component: component_foo

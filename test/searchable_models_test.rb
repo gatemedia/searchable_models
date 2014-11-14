@@ -1,7 +1,7 @@
-require 'test_helper'
+require "test_helper"
 
 class SearchableModelsTest < ActiveSupport::TestCase
-  test "truth" do
-    assert_kind_of Module, SearchableModels
+  test "module is correctly included" do
+    assert ActiveRecord::Base.ancestors.include?(SearchableModels::Searchable)
   end
 end

@@ -1,0 +1,29 @@
+car_one:
+  name: Car One
+  description: This is Car One
+  number_of_doors: 4
+  brand: Brand One Ultimate
+  model: Model One
+  import_date: 1990-10-10
+  kind: <%= Car.kinds[:van] %>
+  group: group_one
+
+car_two:
+  name: Car Two
+  description: This is Car Two
+  number_of_doors: 3
+  brand: Brand Two Ultimate
+  model: Model Two
+  import_date: 1990-10-15
+  kind: <%= Car.kinds[:sedan] %>
+  group: group_one
+
+car_foo:
+  name: Car Foo foo Bar
+  description: This is Car Foo foo bar
+  number_of_doors: 2
+  brand: Brand Foo bar
+  model: Model Foo bar
+  import_date: 1990-10-20
+  kind: <%= Car.kinds[:family] %>
+  group: group_foo

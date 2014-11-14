@@ -1,0 +1,14 @@
+component_one:
+  name: Component one
+  serial: 1234567890987654321
+  provider: provider_one
+
+component_two:
+  name: Component two
+  serial: 1234567890987654321
+  provider: provider_two
+
+component_foo:
+  name: Component foo
+  serial: 1234567890987654321
+  provider: provider_foo
