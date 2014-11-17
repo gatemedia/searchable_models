@@ -3,6 +3,3 @@ rvm:
   - 1.9.3
   - 2.0.0
   - 2.1.3
-before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - cp test/dummy/config/database.yml.travis test/dummy/config/database.yml
