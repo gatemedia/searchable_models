@@ -1,4 +1,5 @@
 # SearchableModels
+[![Build Status](https://travis-ci.org/gatemedia/searchable_models.svg?branch=master)](https://travis-ci.org/gatemedia/searchable_models)
 
 SearchableModels provide a `search` scope on ActiveRecord models.
 
