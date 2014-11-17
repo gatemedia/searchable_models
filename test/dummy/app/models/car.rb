@@ -28,7 +28,7 @@ class Car < ActiveRecord::Base
   search_on :import_date, :mode => :scope, :scope => :imported_on
 
   # search on enums
-  enum :kind => %i(van sedan family)
+  enum :kind => [:van, :sedan, :family]
   search_on :kind, :mode => :enum, :param => :type_of_car
 
   # search on tags (support for acts-as-taggable-on)
