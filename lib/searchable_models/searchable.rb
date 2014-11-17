@@ -11,7 +11,7 @@ module SearchableModels
 
         fields = _search_fields.select do |_, v|
           v.try(:exclude?, :mode) \
-            || %i(exact scope enum).include?(v.try(:[], :mode))
+            || [:exact, :scope, :enum].include?(v.try(:[], :mode))
         end
         results = _search(results, fields, params)
 
