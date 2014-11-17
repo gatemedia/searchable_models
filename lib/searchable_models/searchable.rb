@@ -23,11 +23,88 @@ module SearchableModels
     end
 
     module ClassMethods
+      # This method will setup a search query and add a `search` scope. When
+      # calling `search`, all the configured searches will be run. See the
+      # examples for different configurations of the search.
+      #
+      # Example:
+      #
+      #   class Car < ActiveRecord::Base
+      #     # simple search on one column (exact match)
+      #     search_on :maker
+      #     search_on :number_of_doors
+      #   end
+      #
+      #   Car.search(:maker => "Tesla")
+      #   Car.search(:maker => "VW", :number_of_doors => 2)
+      #
+      #   class Car < ActiveRecord::Base
+      #     # fuzzy search (case insensitive)
+      #     search_on :maker, :mode => :fuzzy
+      #   end
+      #
+      #   Car.search(:maker => "sla")
+      #
+      #   class Car < ActiveRecord::Base
+      #     # Grouped searches
+      #     search_on :maker, :mode => :fuzzy, :param => :query
+      #     search_on :name, :mode => :fuzzy, :param => :query
+      #   end
+      #
+      #   Car.search(:query => "sla")
+      #
+      #   class Car < ActiveRecord::Base
+      #     # search on association id
+      #     belongs_to :fleet
+      #     search_on :fleet_id
+      #   end
+      #
+      #   Car.search(:fleet_id => 33)
+      #
+      #   class Car < ActiveRecord::Base
+      #     # search through on association
+      #     belongs_to :fleet
+      #     search_on :name, :through => :fleet
+      #   end
+      #
+      #   class Car < ActiveRecord::Base
+      #     # using a scope (only one parameter scopes are valid)
+      #     scope :imported_on, ->(date) { where(:import_date => date) }
+      #     scope :import_date, :mode => :scope, :scope => :imported_on
+      #   end
+      #
+      #   Car.search(:import_date => "1975-12-12")
+      #
+      #   class Car < ActiveRecord::Base
+      #     # acts-as-taggable-on support
+      #     acts_as_taggable
+      #     search_on :tags
+      #   end
+      #
+      #   Car.search(:tags => %w(small yellow))
+      #   Car.search(:tags => %w(yellow blue red), :tags_combination => :or)
+      #
+      #   Car.search(:import_date => "1975-12-12")
+      #     # globalize support
+      #     translates :name
+      #     search_on :name, :mode => :fuzzy
+      #   end
+      #
+      #   Car.search(:name => "sla")
       def search_on(*args)
         self._search_fields ||= {}
         self._search_fields.merge!(args.first => args.extract_options!)
       end
 
+      # By the default, the order is based on column `id`. You can use this
+      # method to change the column.
+      #
+      # Example
+      #
+      #   class Car < ActiveRecord::Base
+      #     search_on(:name)
+      #     search_ordered_by(:name)
+      #   end
       def search_ordered_by(field)
         self._search_order = field
       end
@@ -42,7 +119,12 @@ module SearchableModels
                     when field == :tags
                       _tags_search(results, value, params[:tags_combination])
                     when field =~ /_id(?:s)?$/ && options[:through]
-                      _association_ids_search(results, field, value, options[:through])
+                      _association_ids_search(
+                        results,
+                        field,
+                        value,
+                        options[:through]
+                      )
                     when options[:mode] == :scope && options[:scope]
                       _search_with_scope(results, value, options[:scope])
                     when options[:mode] == :enum
@@ -122,7 +204,10 @@ module SearchableModels
       def _check_type_for_fuzzy_search(field)
         return if try(:translated?, field) \
           || columns_hash[field.to_s].try(:type) == :string
-        fail(ArgumentError, "#{field} must of type string to run a fuzzy search")
+        fail(
+          ArgumentError,
+          "#{field} must be of type string to run a fuzzy search on it"
+        )
       end
     end
   end
