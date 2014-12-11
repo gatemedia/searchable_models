@@ -13,6 +13,10 @@ class CarTest < ActiveSupport::TestCase
     assert_results(Car.search(:query => "foo"))
   end
 
+  test "search car with fuzzy search on text field" do
+    assert_results(Car.search(:long_description => "foo"))
+  end
+
   test "search car with exact search" do
     assert_results(Car.search(:number_of_doors => 2))
   end

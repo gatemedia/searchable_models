@@ -198,7 +198,7 @@ module SearchableModels
 
       def _check_type_for_fuzzy_search(field)
         return if try(:translated?, field) \
-          || columns_hash[field.to_s].try(:type) == :string
+          || %i(string text).include?(columns_hash[field.to_s].try(:type))
         fail(
           ArgumentError,
           "#{field} must be of type string to run a fuzzy search on it"

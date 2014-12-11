@@ -5,6 +5,9 @@ class Car < ActiveRecord::Base
   # fuzzy search on one field with named parameter
   search_on :model, :mode => :fuzzy, :param => :m
 
+  # fuzzy search on text field
+  search_on :long_description, :mode => :fuzzy
+
   # fuzzy search on multiple fields with named parameter
   search_on :name, :mode => :fuzzy, :param => :query
   search_on :description, :mode => :fuzzy, :param => :query

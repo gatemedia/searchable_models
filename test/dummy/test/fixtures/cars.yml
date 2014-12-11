@@ -7,6 +7,7 @@ car_one:
   import_date: 1990-10-10
   kind: <%= Car.kinds[:van] %>
   group: group_one
+  long_description: This is Car One long description
 
 car_two:
   name: Car Two
@@ -17,6 +18,7 @@ car_two:
   import_date: 1990-10-15
   kind: <%= Car.kinds[:sedan] %>
   group: group_one
+  long_description: This is Car Two long description
 
 car_foo:
   name: Car Foo foo Bar
@@ -27,3 +29,4 @@ car_foo:
   import_date: 1990-10-20
   kind: <%= Car.kinds[:family] %>
   group: group_foo
+  long_description: This is Car Foo bar long description
