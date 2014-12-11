@@ -118,8 +118,8 @@ module SearchableModels
           results = case
                     when field == :tags
                       _tags_search(results, value, params[:tags_combination])
-                    when field =~ /_id(?:s)?$/ && options[:through]
-                      _association_ids_search(
+                    when options[:through]
+                      _associations_search(
                         results,
                         field,
                         value,
@@ -185,7 +185,7 @@ module SearchableModels
         results.where(field => value)
       end
 
-      def _association_ids_search(results, field, value, through)
+      def _associations_search(results, field, value, through)
         return results unless through
         table = _get_last_value(through).to_s.pluralize
         results.joins(through).where(table => { field => value })
@@ -194,11 +194,6 @@ module SearchableModels
       def _get_last_value(object)
         return _get_last_value(object.first.last) if object.is_a?(Hash)
         object
-      end
-
-      def _through_association_ids_search(results, field, value, through)
-        return results unless through
-        results.joins(through).where(through => { field => value })
       end
 
       def _check_type_for_fuzzy_search(field)

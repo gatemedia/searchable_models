@@ -25,6 +25,10 @@ class CarTest < ActiveSupport::TestCase
     assert_results(Car.search(:component_id => components(:component_foo)))
   end
 
+  test "search car with through on any field" do
+    assert_results(Car.search(:serial => components(:component_foo).serial))
+  end
+
   test "search car with deep through" do
     assert_results(Car.search(:provider_id => providers(:provider_foo)))
   end

@@ -23,6 +23,9 @@ class Car < ActiveRecord::Base
   # search with deep through
   search_on :provider_id, :through => { :doors => :component }
 
+  # search with through on any field
+  search_on :serial, :through => { :doors => :component }
+
   # search with scope
   scope :imported_on, ->(date) { where(:import_date => date) }
   search_on :import_date, :mode => :scope, :scope => :imported_on

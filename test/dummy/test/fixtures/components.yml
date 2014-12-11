@@ -10,5 +10,5 @@ component_two:
 
 component_foo:
   name: Component foo
-  serial: 1234567890987654321
+  serial: 1234567654321234567890
   provider: provider_foo
