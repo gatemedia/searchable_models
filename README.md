@@ -26,7 +26,7 @@ Other versions may or may not work.
 To use it, add it to your Gemfile:
 
 ```ruby
-gem 'searchable_models', '~> 0.1'
+gem 'searchable_models', '~> 0.2'
 ```
 
 and bundle:
