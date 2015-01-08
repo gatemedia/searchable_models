@@ -8,13 +8,14 @@ This idea is to describe which fields are searchable and the gem will do the res
 ## Compatibility
 
 SearchableModels has been used with:
-* ruby 2
-* rails 4.1
+* ruby 2.x
+* rails 4.2
 
 However this gem is built against:
 * ruby 1.9.3
 * ruby 2.0.0
 * ruby 2.1.3
+* ruby 2.2.0
 
 Other versions may or may not work.
 
